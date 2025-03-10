@@ -20,14 +20,14 @@ def app_sidebar():
 
     def get_input_features():
         input_features = {
-            'pregnancies': pregnancies,
-            'glucose': glucose,
-            'blood_pressure': blood_pressure,
-            'skin_thickness': skin_thickness,
-            'insulin': insulin,
-            'bmi': bmi,
-            'diabetes_pedigree': diabetes_pedigree,
-            'age': age
+            'Pregnancies': pregnancies,
+            'Glucose': glucose,
+            'BloodPressure': blood_pressure,
+            'SkinThickness': skin_thickness,
+            'Insulin': insulin,
+            'BMI': bmi,
+            'DiabetesPedigreeFunction': diabetes_pedigree,
+            'Age': age
         }
         return input_features
 

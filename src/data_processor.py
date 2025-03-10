@@ -15,6 +15,7 @@ def load_data(data_path):
             df: dataframe containing the input data
     """
     df = pd.read_csv(data_path)
+    print("Columns in dataset:", df.columns)  # This will show the exact column names
     return df
 
 def save_data(data_path, df):
@@ -39,8 +40,12 @@ def log_txf(df, cols: list):
             df: resultant dataframe containing newly transformed columns
     """
     for col in cols:
-        df['log_'+col] = np.log(df[col]+1)
+        if col in df.columns:  # Check if the column exists
+            df['log_' + col] = np.log(df[col] + 1)
+        else:
+            print(f"Warning: Column '{col}' not found in the dataset!")
     return df
+
 
 def remap_emp_length(x):
     """
@@ -58,16 +63,24 @@ def remap_emp_length(x):
         return '6_to_9yr'
     return 'more_than_9yr'
 
+
 def preprocess(df):
     """
-    Orchestrate data pre-processing procedures.
+    Orchestrate data pre-processing procedures for diabetes-related features.
         Parameters:
             df: Input dataframe to be pre-processed
         Returns:
             df: Resultant dataframe after pre-processing
     """
-    df = log_txf(df, ['annual_inc'])
-    df['emp_len'] = df['emp_length'].map(remap_emp_length)
+    # Apply log transformation to numerical columns that can have large ranges or outliers
+    df = log_txf(df, ['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI','Age'])
+
+    # Optionally, you may want to normalize or scale numerical features for better model performance
+    # Example: Min-max scaling for numeric features (this could be added as needed)
+    # from sklearn.preprocessing import MinMaxScaler
+    # scaler = MinMaxScaler()
+    # df[['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']] = scaler.fit_transform(df[['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']])
+
     return df
 
 def run(data_path):
