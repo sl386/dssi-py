@@ -6,31 +6,44 @@ if 'input_features' not in st.session_state:
     st.session_state['input_features'] = {}
 
 def app_sidebar():
-    st.sidebar.header('Loan Details')
-    emp_length_options = ['< 1 year','1 year','2 years','3 years','4 years','5 years',
-                          '6 years','7 years','8 years','9 years','10+ years']
-    emp_length = st.sidebar.selectbox("Employment Length", emp_length_options)
-    int_rate = st.sidebar.slider('Loan Interest Rate', 5, 40, 10, 1)
-    annual_inc = st.sidebar.text_input("Annual Income '000s", placeholder="in '000s")
-    fico_range_high = st.sidebar.slider('FICO Upper Boundary', 600, 800, 700, 50)
-    loan_amnt = st.sidebar.text_input('Loan Amount')
+    st.sidebar.header('Diabetes Prediction')
+
+    # Input fields for diabetes-related variables
+    pregnancies = st.sidebar.slider('Number of Pregnancies', 0, 20, 0, 1)
+    glucose = st.sidebar.slider('Glucose Level', 0, 200, 100, 1)
+    blood_pressure = st.sidebar.slider('Blood Pressure', 0, 200, 80, 1)
+    skin_thickness = st.sidebar.slider('Skin Thickness (mm)', 0, 100, 20, 1)
+    insulin = st.sidebar.slider('Insulin Level', 0, 900, 100, 1)
+    bmi = st.sidebar.slider('BMI (kg/m^2)', 10.0, 70.0, 25.0, 0.1)
+    diabetes_pedigree = st.sidebar.slider('Diabetes Pedigree Function', 0.0, 2.5, 0.5, 0.01)
+    age = st.sidebar.slider('Age', 18, 100, 30, 1)
+
     def get_input_features():
-        input_features = {'emp_length': emp_length,
-                          'int_rate': int_rate,
-                          'annual_inc': int(annual_inc)*1000,
-                          'fico_range_high': fico_range_high,
-                          'loan_amnt': int(loan_amnt)
-                         }
+        input_features = {
+            'pregnancies': pregnancies,
+            'glucose': glucose,
+            'blood_pressure': blood_pressure,
+            'skin_thickness': skin_thickness,
+            'insulin': insulin,
+            'bmi': bmi,
+            'diabetes_pedigree': diabetes_pedigree,
+            'age': age
+        }
         return input_features
+
+    # Buttons for prediction and reset
     sdb_col1, sdb_col2 = st.sidebar.columns(2)
     with sdb_col1:
-        predict_button = st.sidebar.button("Assess", key="predict")
+        predict_button = st.sidebar.button("Predict Diabetes Outcome", key="predict")
     with sdb_col2:
         reset_button = st.sidebar.button("Reset", key="clear")
+
     if predict_button:
         st.session_state['input_features'] = get_input_features()
+
     if reset_button:
         st.session_state['input_features'] = {}
+
     return None
 
 def app_body():
