@@ -1,0 +1,1 @@
+{"name": "random_forest_diabetes", "description": "Random Forest model for diabetes prediction", "f1_score": 0.8170472844385889, "version": 1, "registration_date": "2025-03-10T12:14:58.649806", "model": "random_forest_diabetes_model_v1.joblib", "features": "random_forest_diabetes_features_v1.joblib"}
