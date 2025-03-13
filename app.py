@@ -26,7 +26,7 @@ def app_sidebar():
             'SkinThickness': skin_thickness,
             'Insulin': insulin,
             'BMI': bmi,
-            'DiabetesPedigreeFunction': diabetes_pedigree,
+            'DiabetesPedigreeFunction': diabetes_pedigree, 
             'Age': age
         }
         return input_features
@@ -47,7 +47,7 @@ def app_sidebar():
     return None
 
 def app_body():
-    title = '<p style="font-family:arial, sans-serif; color:Blue; font-size: 40px;"><b> Welcome to DSSI Loan Assessment</b></p>'
+    title = '<p style="font-family:arial, sans-serif; color:Blue; font-size: 40px;"><b>Diabetes Prediction</b></p>'
     st.markdown(title, unsafe_allow_html=True)
     default_msg = '**System assessment says:** {}'
     if st.session_state['input_features']:
