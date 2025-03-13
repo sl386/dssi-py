@@ -59,10 +59,11 @@ def app_body():
                                     bmi=st.session_state['input_features']['BMI'],
                                     diabetes_pedigree=st.session_state['input_features']['DiabetesPedigreeFunction'],
                                     age=st.session_state['input_features']['Age'])
-        if assessment.lower() == 'yes':
-            st.success(default_msg.format('Approved'))
-        else:
-            st.warning(default_msg.format('Rejected'))
+        st.write("Assessment Output:", assessment)
+        # if assessment.lower() == 'yes':
+        #    st.success(default_msg.format('Approved'))
+        #else:
+        #    st.warning(default_msg.format('Rejected'))
     return None
 
 def main():
