@@ -47,15 +47,18 @@ def app_sidebar():
     return None
 
 def app_body():
-    title = '<p style="font-family:arial, sans-serif; color:Blue; font-size: 40px;"><b>Diabetes Prediction</b></p>'
+    title = '<p style="font-family:arial, sans-serif; color:Blue; font-size: 40px;"><b>Diabetes Prediction with Random Forest</b></p>'
     st.markdown(title, unsafe_allow_html=True)
     default_msg = '**System assessment says:** {}'
     if st.session_state['input_features']:
-        assessment = get_prediction(emp_length=st.session_state['input_features']['emp_length'],
-                                    int_rate=st.session_state['input_features']['int_rate'],
-                                    annual_inc=st.session_state['input_features']['annual_inc'],
-                                    fico_range_high=st.session_state['input_features']['fico_range_high'],
-                                    loan_amnt=st.session_state['input_features']['loan_amnt'])
+        assessment = get_prediction(pregnancies=st.session_state['input_features']['Pregnancies'],
+                                    glucose=st.session_state['input_features']['Glucose'],
+                                    blood_pressure=st.session_state['input_features']['BloodPressure'],
+                                    skin_thickness=st.session_state['input_features']['SkinThickness'],
+                                    insulin=st.session_state['input_features']['Insulin'],
+                                    bmi=st.session_state['input_features']['BMI'],
+                                    diabetes_pedigree=st.session_state['input_features']['DiabetesPedigreeFunction'],
+                                    age=st.session_state['input_features']['Age'])
         if assessment.lower() == 'yes':
             st.success(default_msg.format('Approved'))
         else:
