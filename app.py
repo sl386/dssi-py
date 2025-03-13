@@ -47,7 +47,7 @@ def app_sidebar():
     return None
 
 def app_body():
-    title = '<p style="font-family:arial, sans-serif; color:Blue; font-size: 40px;"><b>Diabetes Prediction with Random Forest</b></p>'
+    title = title = title = '<p style="font-family:arial, sans-serif; color:#31333F; font-size: 40px; text-align:center;"><b>Diabetes Prediction with Random Forest</b></p>'
     st.markdown(title, unsafe_allow_html=True)
     default_msg = '**System assessment says:** {}'
     if st.session_state['input_features']:
@@ -59,11 +59,13 @@ def app_body():
                                     bmi=st.session_state['input_features']['BMI'],
                                     diabetes_pedigree=st.session_state['input_features']['DiabetesPedigreeFunction'],
                                     age=st.session_state['input_features']['Age'])
-        st.write("Assessment Output:", assessment)
-        # if assessment.lower() == 'yes':
-        #    st.success(default_msg.format('Approved'))
-        #else:
-        #    st.warning(default_msg.format('Rejected'))
+        # Display result based on assessment value
+        if assessment.lower() == "positive":
+            result_text = '<p style="font-family:arial, sans-serif; color:#FF4B4B; font-size: 20pt; text-align:center;"><b>!!! High likelihood of diabetes !!!</b></p>'
+            st.markdown(result_text, unsafe_allow_html=True)
+        if assessment.lower() == "negative":
+            result_text = '<p style="font-family:arial, sans-serif; color:#31333F; font-size: 20pt; text-align:center;"><b>Low likelihood of diabetes</b></p>'
+            st.markdown(result_text, unsafe_allow_html=True)
     return None
 
 def main():
